@@ -4,4 +4,6 @@ Write down, in order, what you asked the AI. It is not a punishment: a missing o
 
 | Time (approx.) | What you asked (briefly) | What you kept | What you changed or rejected |
 |---|---|---|---|
-| _(fill in)_ | _(fill in)_ | _(fill in)_ | _(fill in)_ |
+| Commit 1 | Am cerut analiza starterului si implementarea Result, CQRS si Rich Domain | Am pastrat clasele de domeniu, validarile si interfetele generate | Am cerut implementare simpla, pe etape |
+| Commit 2 | Am cerut cele 5 Vertical Slices cu handlers si endpoints | Am pastrat comenzile, query-urile si handlerele generate | Am pastrat endpoint-urile vechi pana la conectarea celor noi |
+| Commit 3 | Am cerut EF Core, SQLite, Repository si UnitOfWork | Am pastrat configurarile bazei de date si modificarile din Program.cs | Am rulat personal restore si build |
