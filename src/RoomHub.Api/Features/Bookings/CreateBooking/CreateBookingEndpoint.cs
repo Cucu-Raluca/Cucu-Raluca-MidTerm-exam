@@ -1,0 +1,28 @@
+using RoomHub.Api.Common;
+
+namespace RoomHub.Api.Features.Bookings.CreateBooking;
+
+public record CreateBookingRequest(string? BookedBy, DateTime StartUtc, DateTime EndUtc, int Attendees);
+
+public static class CreateBookingEndpoint
+{
+    public static void MapCreateBooking(this IEndpointRouteBuilder app)
+    {
+        app.MapPost("/api/rooms/{roomId:guid}/bookings", async (
+            Guid roomId,
+            CreateBookingRequest request,
+            CreateBookingHandler handler,
+            CancellationToken cancellationToken) =>
+        {
+            var command = new CreateBookingCommand(
+                roomId, request.BookedBy, request.StartUtc, request.EndUtc, request.Attendees);
+
+            var result = await handler.Handle(command, cancellationToken);
+
+            if (result.IsFailure)
+                return result.Error.ToProblem();
+
+            return Results.Created($"/api/bookings/{result.Value.Id}", result.Value);
+        }).WithTags("Bookings");
+    }
+}
